@@ -109,6 +109,86 @@ def sms_len(text) -> str:
         return str(text)[:160]
     except:
         return 'Data error'
-'''
+
 
 #7
+
+def common_multiples(A, B, N):
+    """
+    function for search common multiples
+    """
+
+    #calculate GCD
+    b = B
+    a = A
+    while b != 0:
+        a, b = b, a % b
+    else:
+        gcd = a
+
+    lcm = A * B // gcd
+
+    # Adding multiples in list
+    result = []
+    multiple = lcm
+    while multiple <= N:
+        result.append(multiple)
+        multiple += lcm
+
+    return result
+
+
+#Example
+A, B, N = 4, 6, 50
+multiples = common_multiples(A, B, N)
+print(f"Общие кратные {A} и {B} до {N}: {multiples}")
+
+
+#8th
+from datetime import datetime
+
+def time_format(time_taking):
+
+    #ValueError
+    #:param time_taking:
+    #:return:
+
+    #DD.MM.YY HR:MIN:SEC
+
+
+
+    try:
+        time_fom = datetime.strptime(time_taking, '%m/%d/%Y %H:%M:%S')
+        print(time_fom.strftime('%d.%m.%y %I:%M %p %S'))
+    except ValueError:
+        print('Ошибка в значении времени')
+    pass
+
+
+#9
+from datetime import datetime
+
+def definition(cur_time_str):
+    cur_time = datetime.strptime(cur_time_str, '%m/%d/%Y %H:%M:%S')
+    year_start = datetime.strptime(f'01/01/{cur_time.year} 00:00:00', '%m/%d/%Y %H:%M:%S')
+    return (cur_time - year_start).seconds
+
+print(definition('01/01/2020 00:00:11'))
+
+
+#10
+
+def range_ab(a, b):
+    numbers = {1,3,4,8,9}
+    exit_n = set()
+    if a>b: a, b = b, a
+
+    for n in range(a, b+1):
+        for nn in str(n):
+            if int(nn) in numbers:
+                exit_n.add(n)
+                continue
+
+    print(*exit_n)
+
+range_ab(100, 20)
